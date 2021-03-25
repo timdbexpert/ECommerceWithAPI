@@ -1,0 +1,295 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/4.8.95/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="~/style/main.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    @*<link rel="stylesheet" href="~/css/site.css" />*@
+</head>
+<body>
+    <div class="main-page ">
+        <!--Header-->
+        <header class="main-header" style="background-color: black">
+
+
+            <div id="navbar">
+
+                <div id="nav-belt">
+                    <div class="nav-left">
+                        <span class="open" style="font-size:1.5em;cursor:pointer;color: white;">&#9776; </span>
+                        <a asp-action="Index" asp-controller="Shop"><img src="~/images/amazon.jpg" height="50px"></a>
+                    </div>
+
+                    <form method="get" asp-controller="Shop" asp-action="Product">
+                        <div class="nav-center">
+                            <input class="search " name="searchProduct" type="search">
+                            <button id="btn" type="submit" class="btn-search"><i class="mdi mdi-magnify"></i></button>
+                        </div>
+                    </form>
+
+                    <div class="nav-right">
+                        <div class="global-lang">
+                            <div class="dropdown">
+                                <button class="dropbtn"> <i class="mdi mdi-earth "></i></button>
+                                <div class="dropdown-content">
+                                    <a href="#">Azerbaijan</a>
+                                    <a href="#">English</a>
+                                </div>
+                            </div>
+                        </div>
+                        <a asp-controller="Account" asp-action="Login">
+                            <div class="account"><i class="mdi mdi-account"></i></div>
+                        </a>
+                        <a asp-controller="Shop" asp-action="ProductCart">
+                            <div class="basket-item">
+                                <div class="basket">
+                                    <i class="mdi mdi-cart-outline"></i>
+                                    <span class="count" id="cartProductCount"></span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+
+                </div>
+            </div>
+
+        </header>
+
+        <!--Header-->
+        <!--Main-->
+        <!-- <div class="navigation-bar">
+          <div class="subnav">
+            <button class="subnavbtn">Electronic <i class="fa fa-caret-down"></i></button>
+           <div class="subnav-content">
+             <ul class="bb">
+              <li><a>Phone></a></li>
+              <li><a>Accessory></a></li>
+              <li><a>TV and Audio></a>  </li>
+             </ul>
+
+          </div>
+
+          </div>
+          <div class="subnav">
+            <button class="subnavbtn">Computer <i class="fa fa-caret-down"></i></button>
+            <div class="subnav-content">
+              <ul class="bb">
+                <li><a>Computer></a></li>
+                <li><a>Peripheral devices></a></li>
+                <li><a>Computer Spare Parts></a></li>
+                <li><a>Tablets and covers for tablets></a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="subnav">
+            <button class="subnavbtn">Game <i class="fa fa-caret-down"></i></button>
+            <div class="subnav-content">
+              <ul  class="bb">
+                <li><a>Computer></a></li>
+                <li><a>Peripheral devices></a></li>
+                <li><a>Computer Spare Parts></a></li>
+                <li><a>Tablets and covers for tablets></a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="subnav">
+            <button class="subnavbtn">Photo and Video <i class="fa fa-caret-down"></i></button>
+            <div class="subnav-content">
+              <ul  class="bb">
+                <li><a>Computer></a></li>
+                <li><a>Peripheral devices></a></li>
+                <li><a>Computer Spare Parts></a></li>
+                <li><a>Tablets and covers for tablets></a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="subnav">
+            <button class="subnavbtn">Məişət avadanlıqları <i class="fa fa-caret-down"></i></button>
+            <div class="subnav-content">
+              <ul  class="bb">
+                <li><a>Computer></a></li>
+                <li><a>Peripheral devices></a></li>
+                <li><a>Computer Spare Parts></a></li>
+                <li><a>Tablets and covers for tablets></a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="subnav">
+            <button class="subnavbtn">Parfum and Cosmetics <i class="fa fa-caret-down"></i></button>
+            <div class="subnav-content">
+              <ul  class="bb">
+                <li><a>Computer></a></li>
+                <li><a>Peripheral devices></a></li>
+                <li><a>Computer Spare Parts></a></li>
+                <li><a>Tablets and covers for tablets></a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="subnav">
+            <button class="subnavbtn"> Accessory<i class="fa fa-caret-down"></i></button>
+            <div class="subnav-content">
+              <ul  class="bb">
+                <li><a>Computer></a></li>
+                <li><a>Peripheral devices></a></li>
+                <li><a>Computer Spare Parts></a></li>
+                <li><a>Tablets and covers for tablets></a></li>
+              </ul>
+            </div>
+          </div>
+        </div> -->
+        <!--Main-->
+        <!--Side Nav-->
+        <div id="mySidenav" class="sidenav">
+            <a class="closebtn">&times;</a>
+            @*<button id="menu" class="dropdown-btn">Electronics<i class="fa fa-caret-down"></i></button>
+                <div class="dropdown-container">
+                    <a href="#">Cell Phone</a>
+                    <a href="#">Tablets</a>
+                    <a href="#">Computers</a>
+                </div>
+
+                <button id="menu" class="dropdown-btn">Camera<i class="fa fa-caret-down"></i></button>
+                <div class="dropdown-container">
+                    <a href="#">Foto Camera</a>
+                    <a href="#">Video Camera</a>
+                    <a href="#">Foto Object</a>
+                </div>
+
+                <button id="menu" class="dropdown-btn">Accessories<i class="fa fa-caret-down"></i></button>
+                <div class="dropdown-container">
+                    <a href="#">Smart Watch</a>
+                    <a href="#">HeadPhone</a>
+                    <a href="#">Power Bank</a>
+                </div>*@
+
+            <button id="menu" class="dropdown-btn">Fashion<i class="fa fa-caret-down"></i></button>
+            <div class="dropdown-container">
+                <a style="font-size:1em" href="#">For Men's</a>
+                <a style="font-size:1em" href="#">For Women's</a>
+                <a style="font-size:1em" href="#">For Baby's</a>
+            </div>
+            <button id="menu" class="dropdown-btn">Household appliances<i class="fa fa-caret-down"></i></button>
+            <div class="dropdown-container">
+                <a style="font-size:1em" href="#">Printing equipment</a>
+                <a style="font-size:1em" href="#">Household appliances</a>
+                <a style="font-size:1em" href="#">Beauty Products</a>
+            </div>
+            <button id="menu" class="dropdown-btn">Parfum and Cosmetics<i class="fa fa-caret-down"></i></button>
+            <div class="dropdown-container">
+                <a style="font-size:1em" href="#">Link 10</a>
+                <a style="font-size:1em" href="#">Link 11</a>
+                <a style="font-size:1em" href="#">Link 12</a>
+            </div>
+            <button id="menu" class="dropdown-btn">Accessory<i class="fa fa-caret-down"></i></button>
+            <div class="dropdown-container">
+                <a style="font-size:1em" href="#">Link 10</a>
+                <a style="font-size:1em" href="#">Link 11</a>
+                <a style="font-size:1em" href="#">Link 12</a>
+            </div>
+        </div>
+
+
+
+
+    </div>
+
+    @RenderBody()
+
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/product.js"></script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@beta/dist/js.cookie.min.js"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/js-cookie@beta/dist/js.cookie.min.mjs"></script>
+    @RenderSection("Scripts", required: false);
+
+    <script>
+        updateCartProduct();
+        $(document).ready(() => {
+
+            $.ajax({
+                type: "GET",
+                url: "/Admin/Product/GetAllMenu",
+                success: function (responce) {
+                    for (let f of responce) {
+                        $("#mySidenav").append(`<button  class=" dropdown-btn" id=${f.id} value=${f.id} class="dropdown-btn">${f.name}<i class="fa fa-caret-down"></i></button>`);
+
+                        $("#mySidenav").append(`<div class=${f.id} class="dropdown-container" ></div>`);
+
+                        $(`#${f.id}`).click(function () {
+                            var selecedId = $(this).val();
+                            this.classList.toggle("active");
+
+                            var dropdownContent = this.nextElementSibling;
+                            if (dropdownContent.style.display === "block") {
+                                dropdownContent.style.display = "none";
+                            }
+                            else {
+                                dropdownContent.style.display = "block";
+                            }
+                            $.ajax({
+                                type: "Post",
+                                url: "/Admin/Brand/GetSubMenuById",
+                                data: { id: selecedId },
+                                success: function (responce) {
+                                    if ($(`.${selecedId}`).is(':empty')) {
+                                        for (f of responce) {
+                                            $(`.${selecedId}`).append(`<a style="font-size:1em"   href="/Shop/Product/${f.id}">${f.name}</a>`);
+                                        }
+                                    }
+
+                                }
+                            })
+                        });
+                    }
+                }
+            });
+        });
+    </script>
+    <script>
+        var open = document.getElementsByClassName("open")[0];
+        open.addEventListener("click", () => {
+            document.getElementById("mySidenav").style.width = "260px";
+        });
+
+        var close = document.getElementsByClassName("closebtn")[0];
+        close.addEventListener("click", function () {
+            document.getElementById("mySidenav").style.width = "0";
+        })
+
+
+        var dropdown = document.getElementsByClassName("dropdown-btn");
+        var i;
+
+        for (i = 0; i < dropdown.length; i++) {
+            dropdown[i].addEventListener("click", function () {
+                this.classList.toggle("active");
+                var dropdownContent = this.nextElementSibling;
+                if (dropdownContent.style.display === "block") {
+                    dropdownContent.style.display = "none";
+                }
+                else {
+                    dropdownContent.style.display = "block";
+                }
+            });
+        }
+
+    </script>
+
+
+</body>
+</html>

@@ -1,0 +1,59 @@
+﻿@model ECommerce_MVC.Models.FiltersViewModel
+
+@foreach (var product in Model.ProductsVithoutPage)
+{
+    <div class="  col-sm-12 col-md-6 col-lg-4  pb-5">
+        <div class="img1">
+            <a asp-action="InfoProduct" asp-controller="Shop" asp-route-id="@product.Id" ><img src="~/images/@product.MainImage" alt="img" width="100%" style="cursor: pointer;" /></a>
+
+        </div>
+        <div class="info">
+            <p>@product.Name</p>
+            <span> @product.Price $</span>
+        </div>
+
+    </div>
+}
+
+<script>
+
+    $(document).ready(() => {
+
+
+        var products = [];
+        var productids;
+
+        if (products.length == 0) {
+            productids = Cookies.get('ProductCart');
+
+            if (productids != null) {
+
+                var ids = productids.split('-');
+
+                if (ids.length == 1) {
+                    products.push(ids);
+                };
+
+                for (f of ids) {
+                    products.push(f);
+                }
+            }
+
+            console.log(products);
+        }
+        $(".addtoCart").click(function () {
+
+            var productID = $(this).attr('data-id');
+            products.push(productID);
+            Cookies.set('ProductCart', products.join('-'), { expires: 30, path: '/' });
+
+            // $.cookie('CartProducts', productID);
+
+            alert("Product added to Cart.");
+            console.log(products);
+        });
+
+
+    });
+
+</script>

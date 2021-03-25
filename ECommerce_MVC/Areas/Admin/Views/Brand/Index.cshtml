@@ -1,0 +1,48 @@
+﻿@model IEnumerable<ECommerce_MVC.Areas.Admin.ViewModel.BrandViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-center">Brands</h2>
+
+<p>
+    <a asp-action="Create">Create New Brand</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SubMenuId)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SubMenuId)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit","Brand", new {  id=item.Id  }) |
+                @Html.ActionLink("Details", "Details","Brand", new {  id=item.Id  }) |
+                @Html.ActionLink("Delete", "Delete","Brand", new {  id=item.Id  })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

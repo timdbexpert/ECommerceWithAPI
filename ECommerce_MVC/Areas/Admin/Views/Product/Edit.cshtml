@@ -1,0 +1,245 @@
+﻿@model ECommerce_MVC.Areas.Admin.ViewModel.ProductViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Edit</h1>
+
+<h4>ProductViewModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label> Menu</label>
+                <select id="menu" class="form-control">
+                    <option selected="true" disabled="disabled">Choose Menu</option>
+                </select><br />
+
+                <label> Submenu</label>
+                <select asp-for="Resource" id="submenu" class="form-control">
+                </select><br />
+
+                <label>Brand</label>
+
+                <select asp-for="BrandId" id="brand" class="form-control">
+                </select><br />
+                <span asp-validation-for="BrandId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MainImage" class="control-label"></label>
+                <input asp-for="MainImage" type="file" name="photo" class="form-control" />
+                <span asp-validation-for="MainImage" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">Color</label>
+                <select asp-for="ColorId" id="color" class="form-control">
+                    <option selected="true" disabled="disabled">Choose Color</option>
+                </select><br />
+                <span asp-validation-for="ColorId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Opeation System</label>
+                <select asp-for="Operation_SystemId" id="operation" class="form-control">
+                    <option selected="true" disabled="disabled">Choose Operation System</option>
+                </select><br />
+                <span asp-validation-for="Operation_SystemId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">RAM</label>
+                <select asp-for="RAMId" id="ram" class="form-control">
+                    <option selected="true" disabled="disabled">Choose RAM</option>
+                </select><br />
+                <span asp-validation-for="RAMId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Prosessor</label>
+                <select asp-for="ProsessorId" id="prosessor" class="form-control">
+                    <option selected="true" disabled="disabled">Choose Prosessor</option>
+                </select><br />
+                <span asp-validation-for="ProsessorId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Hard Drive</label>
+                <select asp-for="HardDriveId" id="drive" class="form-control">
+                    <option selected="true" disabled="disabled">Choose Hard Drive</option>
+                </select><br />
+                <span asp-validation-for="HardDriveId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SSDId" class="control-label"></label>
+                <select asp-for="SSDId" id="ssd" class="form-control">
+                    <option selected="true" disabled="disabled">Choose SSD</option>
+                </select><br />
+                <span asp-validation-for="SSDId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label"> Storage</label>
+                <select asp-for="StorageId" id="storage" class="form-control">
+                    <option selected="true" disabled="disabled">Choose Storage</option>
+                </select><br />
+                <span asp-validation-for="StorageId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label"> Style Join</label>
+                <select asp-for="Style_JoinId" id="style" class="form-control">
+                    <option selected="true" disabled="disabled">Choose Style Join</option>
+                </select><br />
+                <span asp-validation-for="Style_JoinId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+
+    <script>
+    $(document).ready(() => {
+        $.ajax({
+              type: "GET",
+                url: "/Admin/Product/GetAllMenu",
+                success: function (response) {
+                    for (let f of response) {
+                        $("#menu").append(`<option value=${f.id}>${f.name}</option>`)
+                    }
+                }
+        });
+        $("#menu").change(function () {
+            $("#submenu").empty();
+             $("#brand").empty();
+            var selectedId = $(this).val();
+            $.ajax({
+                type: "Post",
+                url: "/Admin/Brand/GetSubMenuById",
+                data: { id: selectedId },
+                success: function (response) {
+                    $("#submenu").append(`<option selected="true" disabled="disabled">Select Submenu</option>`);
+                    for (let f of response) {
+                        $("#submenu").append(`<option value=${f.id}>${f.name}</option>`)
+                    }
+                }
+            });
+        });
+        $("#submenu").change(function () {
+
+            var selecedId = $(this).val();
+            $("#brand").empty();
+            $.ajax({
+                type: "Post",
+                url: "/Admin/Product/GetBrandById",
+                 data: { id: selecedId },
+              success: function (response) {
+                    $("#brand").append(`<option selected="true" disabled="disabled">Select Brand</option>`);
+                    for (let f of response) {
+                        $("#brand").append(`<option value=${f.id}>${f.name}</option>`)
+                    }
+                }
+            });
+        });
+
+        ////////////////////////////////
+         $.ajax({
+              type: "GET",
+                url: "/Admin/Product/GetAllColor",
+                success: function (response) {
+                    for (let f of response) {
+                        $("#color").append(`<option value=${f.id}>${f.name}</option>`)
+                    }
+                }
+        });
+         $.ajax({
+              type: "GET",
+                url: "/Admin/Product/GetAllOperationSystem",
+                success: function (response) {
+                    for (let f of response) {
+                        $("#operation").append(`<option value=${f.id}>${f.name}</option>`)
+                    }
+                }
+        });
+          $.ajax({
+              type: "GET",
+                url: "/Admin/Product/GetAllProsessor",
+                success: function (response) {
+                    for (let f of response) {
+                        $("#prosessor").append(`<option value=${f.id}>${f.name}</option>`)
+                    }
+                }
+        });
+         $.ajax({
+              type: "GET",
+                url: "/Admin/Product/GetAllRAM",
+                success: function (response) {
+                    for (let f of response) {
+                        $("#ram").append(`<option value=${f.id}>${f.name}</option>`)
+                    }
+                }
+        });
+        $.ajax({
+              type: "GET",
+                url: "/Admin/Product/GetAllHardDrive",
+                success: function (response) {
+                    for (let f of response) {
+                        $("#drive").append(`<option value=${f.id}>${f.name}</option>`)
+                    }
+                }
+        });
+        $.ajax({
+              type: "GET",
+                url: "/Admin/Product/GetAllSSD",
+                success: function (response) {
+                    for (let f of response) {
+                        $("#ssd").append(`<option value=${f.id}>${f.name}</option>`)
+                    }
+                }
+        });
+
+        $.ajax({
+              type: "GET",
+                url: "/Admin/Product/GetAllStorage",
+                success: function (response) {
+                    for (let f of response) {
+                        $("#storage").append(`<option value=${f.id}>${f.name}</option>`)
+                    }
+                }
+        });
+
+          $.ajax({
+            type: "Get",
+            url: "/Admin/Product/GetAllStyleJoin",
+              success: function (responce) {
+                  for (let f of responce) {
+                      $("#style").append(`<option value=${f.id}>${f.name}</option>`)
+                  }
+
+            }
+        });
+    });
+    </script>
+}

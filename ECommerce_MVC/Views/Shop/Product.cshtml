@@ -1,0 +1,412 @@
+﻿@model ECommerce_MVC.Models.FiltersViewModel
+@using X.PagedList
+@using X.PagedList.Mvc.Core;
+@using X.PagedList.Mvc.Common;
+
+@{
+    ViewData["Title"] = "Product";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<section class="section2">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
+                <div class="leftbar p-r-20 p-r-0-sm">
+
+                    <h3>Filters</h3>
+
+                    <div class="search-product"></div>
+
+                </div>
+
+                <dl id="narrow-by-list">
+                    <dt class="">Brand</dt>
+                    <dd>
+
+                        <ul style="padding-left: 10px;">
+
+                            @foreach (var brand in Model.Brands)
+                            {
+
+                                <li style="list-style:none; cursor:pointer" class="pb-1">
+                                    <input type="checkbox" value="@brand.Id" class="common_selector brand"><label>@brand.Name</label>
+                                    @*<a style="color:black" href="/Shop/Product/@brand.Id"></a>*@
+                                </li>
+                            }
+                        </ul>
+
+
+                    </dd>
+                    @if (Model.SubMenuId == 1)
+                    {
+
+                        <dt class="">RAM</dt>
+                        <dd>
+                            <ul style="padding-left: 10px;">
+                                @for (var i = 1; i < Model.RAMs.Count; i++)
+                                {
+
+                                    <li style="list-style:none" class="pb-1">
+                                        <input type="checkbox" value="@Model.RAMs[i].Id" class="common_selector ram"><label>@Model.RAMs[i].Name</label>
+                                    </li>
+                                }
+
+                            </ul>
+                        </dd>
+
+                        <dt class="">Internal Storage</dt>
+                        <dd>
+                            <ul style="padding-left: 10px;">
+                                @for (var i = 1; i < Model.Storages.Count; i++)
+                                {
+
+                                    <li style="list-style:none" class="pb-1">
+                                        <input type="checkbox" value="@Model.Storages[i].Id" class="common_selector storage"><label>@Model.Storages[i].Name</label>
+                                    </li>
+                                }
+                            </ul>
+                        </dd>
+
+                        <dt class="">Color</dt>
+                        <dd>
+                            <ul style="padding-left: 10px;">
+                                @foreach (var color in Model.Colors)
+                                {
+                                    <li style="list-style:none; cursor:pointer" class="pb-1">
+                                        <input type="checkbox" value="@color.Id" class="common_selector color"><label>@color.Name</label>
+                                    </li>
+                                }
+                            </ul>
+                        </dd>
+                    }
+                    @if (Model.SubMenuId == 2)
+                    {
+                        <dt class="">RAM</dt>
+                        <dd>
+                            <ul style="padding-left: 10px;">
+                                @for (var i = 1; i < Model.RAMs.Count; i++)
+                                {
+
+                                    <li style="list-style:none" class="pb-1">
+                                        <input type="checkbox" value="@Model.RAMs[i].Id" class="common_selector tabletram"><label>@Model.RAMs[i].Name</label>
+                                    </li>
+                                }
+
+                            </ul>
+                        </dd>
+
+                        <dt class="">Internal Storage</dt>
+                        <dd>
+                            <ul style="padding-left: 10px;">
+                                @for (var i = 1; i < Model.Storages.Count; i++)
+                                {
+
+                                    <li style="list-style:none" class="pb-1">
+                                        <input type="checkbox" value="@Model.Storages[i].Id" class="common_selector tabletstorage"><label>@Model.Storages[i].Name</label>
+                                    </li>
+                                }
+                            </ul>
+                        </dd>
+
+                        <dt class="">Color</dt>
+                        <dd>
+                            <ul style="padding-left: 10px;">
+                                @foreach (var color in Model.Colors)
+                                {
+                                    <li style="list-style:none; cursor:pointer" class="pb-1">
+                                        <input type="checkbox" value="@color.Id" class="common_selector tabletcolor"><label>@color.Name</label>
+                                    </li>
+                                }
+                            </ul>
+                        </dd>
+                    }
+                    @if (Model.SubMenuId == 3)
+                    {
+
+                        <dt class="">Prosessor</dt>
+                        <dd>
+                            <ul style="padding-left: 10px;">
+                                @for (var i = 1; i < Model.Prosessors.Count; i++)
+                                {
+
+                                    <li style="list-style:none" class="pb-1">
+                                        <input type="checkbox" value="@Model.Prosessors[i].Id" class="common_selector prosessor"><label>@Model.Prosessors[i].Name</label>
+                                    </li>
+                                }
+                            </ul>
+                        </dd>
+
+                        <dt class="">Hard Drive</dt>
+                        <dd>
+                            <ul style="padding-left: 10px;">
+                                @for (var i = 1; i < Model.HardDrives.Count; i++)
+                                {
+
+                                    <li style="list-style:none" class="pb-1">
+                                        <input type="checkbox" value="@Model.HardDrives[i].Id" class="common_selector harddrive"><label>@Model.HardDrives[i].Name</label>
+                                    </li>
+                                }
+                            </ul>
+                        </dd>
+
+                        <dt class="">RAM</dt>
+                        <dd>
+                            <ul style="padding-left: 10px;">
+                                @for (var i = 1; i < Model.RAMs.Count; i++)
+                                {
+
+                                    <li style="list-style:none" class="pb-1">
+                                        <input type="checkbox" value="@Model.RAMs[i].Id" class="common_selector ram"><label>@Model.RAMs[i].Name</label>
+                                    </li>
+                                }
+
+                            </ul>
+                        </dd>
+
+                        <dt class="">Operation System</dt>
+                        <dd>
+                            <ul style="padding-left: 10px;">
+                                @for (var i = 1; i < Model.Operation_Systems.Count; i++)
+                                {
+
+                                    <li style="list-style:none" class="pb-1">
+                                        <input type="checkbox" value="@Model.Operation_Systems[i].Id" class="common_selector opsystem"><label>@Model.Operation_Systems[i].Name</label>
+                                    </li>
+                                }
+                            </ul>
+                        </dd>
+
+                        <dt class="">SSD</dt>
+                        <dd>
+                            <ul style="padding-left: 10px;">
+                                @for (var i = 1; i < Model.SSDs.Count; i++)
+                                {
+
+                                    <li style="list-style:none" class="pb-1">
+                                        <input type="checkbox" value="@Model.SSDs[i].Id" class="common_selector ssd"><label>@Model.SSDs[i].Name</label>
+                                    </li>
+                                }
+                            </ul>
+                        </dd>
+
+                        <dt class="">Color</dt>
+                        <dd>
+                            <ul style="padding-left: 10px;">
+                                @foreach (var color in Model.Colors)
+                                {
+                                    <li style="list-style:none; cursor:pointer" class="pb-1">
+                                        <input type="checkbox" value="@color.Id" class="common_selector color"><label>@color.Name</label>
+                                    </li>
+                                }
+                            </ul>
+                        </dd>
+                    }
+                    @if (Model.SubMenuId == 7)
+                    {
+                        <dt class="">Operation System</dt>
+                        <dd>
+                            <ul style="padding-left: 10px;">
+                                @for (var i = 1; i < Model.Operation_Systems.Count; i++)
+                                {
+
+                                    <li style="list-style:none" class="pb-1">
+                                        <input type="checkbox" value="@Model.Operation_Systems[i].Id" class="common_selector opsystem"><label>@Model.Operation_Systems[i].Name</label>
+                                    </li>
+                                }
+                            </ul>
+                        </dd>
+
+
+                        <dt class="">Color</dt>
+                        <dd>
+                            <ul style="padding-left: 10px;">
+                                @foreach (var color in Model.Colors)
+                                {
+                                    <li style="list-style:none; cursor:pointer" class="pb-1">
+                                        <input type="checkbox" value="@color.Id" class="common_selector color"><label>@color.Name</label>
+                                    </li>
+                                }
+                            </ul>
+                        </dd>
+                    }
+                    @if (Model.SubMenuId == 8)
+                    {
+                        <dt class="">Style Join</dt>
+                        <dd>
+                            <ul style="padding-left: 10px;">
+                                @for (var i = 1; i < Model.Style_Joins.Count; i++)
+                                {
+
+                                    <li style="list-style:none" class="pb-1">
+                                        <input type="checkbox" value="@Model.Style_Joins[i].Id" class="common_selector stylejoin"><label>@Model.Style_Joins[i].Name</label>
+                                    </li>
+                                }
+                            </ul>
+                        </dd>
+
+                        <dt class="">Color</dt>
+                        <dd>
+                            <ul style="padding-left: 10px;">
+                                @foreach (var color in Model.Colors)
+                                {
+                                    <li style="list-style:none; cursor:pointer" class="pb-1">
+                                        <input type="checkbox" value="@color.Id" class="common_selector color"><label>@color.Name</label>
+                                    </li>
+                                }
+                            </ul>
+                        </dd>
+                    }
+                </dl>
+
+
+
+            </div>
+
+
+            <div class="col-sm-6 col-md-8 col-lg-9">
+                <div class="cloth row">
+                    <div class="product row">
+
+                    </div>
+                  
+
+                    @foreach (var product in Model.Products)
+                    {
+                        <div class="  col-sm-12 col-md-6 col-lg-4  pb-5 current">
+                            <div class="img1">
+                                <a href="/Shop/InfoProduct/@product.Id" id="img"><img src="~/images/@product.MainImage" alt="img" width="100%" style="cursor: pointer;" /></a>
+
+                            </div>
+                            <div class="info">
+                                <p>@product.Name</p>
+                                <span> @product.Price $</span>
+                            </div>
+
+                        </div>
+                    }
+
+                </div>
+
+            </div>
+
+        </div>
+        <div class="justify-content-center">
+            @Html.PagedListPager(Model.Products, page => Url.Action("Product", "Shop", new { page = page }), new X.PagedList.Mvc.Common.PagedListRenderOptionsBase
+       {
+           DisplayItemSliceAndTotal = true,
+           ContainerDivClasses = new[] { "navigation" },
+           LiElementClasses = new[] { "page-item" },
+           PageClasses = new[] { "page-link" },
+       })
+        </div>
+
+
+    </div>
+
+</section>
+<link rel="stylesheet" href="~/style/product.css">
+<script>
+    function rangeSlider(value) {
+        document.getElementById('rangeValue').innerHTML = "$" + value + " -200$";
+    }
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@beta/dist/js.cookie.min.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/js-cookie@beta/dist/js.cookie.min.mjs"></script>
+<script src="~/js/product.js"></script>
+
+<script> 
+
+    $(document).ready(() => {
+
+            if (@Model.detected== 0) {
+                 $('.current').empty();
+                   $('.current').remove();
+                filter_data();
+            }
+           if (@Model.detected== 1) {
+                 $('.col-md-4').empty();
+                   $('.col-md-4').remove();
+            }
+        
+            function filter_data() {
+
+                var brandId = get_filter('brand');
+                var ramId = get_filter('ram');
+                var storageId = get_filter('storage');
+                var colorId = get_filter('color');
+                var ssdId = get_filter('ssd');
+                var opsystemId = get_filter('opsystem');
+                var harddriveId = get_filter('harddrive');
+                var stylejoinId = get_filter('stylejoin');
+                var prosessorId = get_filter('prosessor');
+                var submenuId =@Model.SubMenuId;
+
+                $.ajax({
+                    type: "Post",
+                    url: "/Shop/Product",
+                    data: { submenuId: submenuId, brandId: brandId, colorId: colorId, ramId: ramId, storageId: storageId, ssdId: ssdId, opsystemId: opsystemId, harddriveId: harddriveId, stylejoinId: stylejoinId, prosessorId: prosessorId },
+                    success: function (responce) {
+
+                        $(".product").html(responce);
+
+                        $('.current').empty();
+                    }
+                });
+            };
+
+
+        function get_filter(class_name) {
+            var filter = [];
+            $('.' + class_name + ':checked').each(function () {
+                filter.push($(this).val());
+            });
+            return filter;
+        };
+
+        $('.common_selector').click(function () {
+            filter_data();
+            $('.col-sm-12').remove();
+        });
+
+        var products = [];
+        var productids;
+
+       // if (products.length == 0) {
+        productids = Cookies.get('ProductCart');
+        if (productids != undefined && productids != "" && productids != null) {
+            var ids = productids.split('-');
+
+                if (ids.length == 1) {
+                    products.push(ids);
+                };
+
+                for (f of ids) {
+                    products.push(f);
+                }
+             console.log(products);
+        }
+
+       // }
+
+        $(".addtoCart").click(function () {
+
+            var productID = $(this).attr('data-id');
+              alert(productID);
+            products.push(productID);
+            Cookies.set('ProductCart', products.join('-'), { expires: 30, path: '/' });
+
+            // $.cookie('CartProducts', productID);
+
+            alert("Product added to Cart.");
+            console.log(products);
+            
+        });
+
+
+    });
+
+</script>
+

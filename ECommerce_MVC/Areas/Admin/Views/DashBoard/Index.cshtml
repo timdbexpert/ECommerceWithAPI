@@ -1,0 +1,58 @@
+﻿@model IEnumerable<ECommerce_MVC.Data.AppUser>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h3 class="text-center">Users</h3>
+
+<table class="table">
+    <thead>
+        <tr>
+          
+            <th>
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+        
+            <th>
+                @Html.DisplayNameFor(model => model.LockoutEnabled)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AccessFailedCount)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+         
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+         
+
+            <td>
+                @item.LockoutEnabled
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AccessFailedCount)
+            </td>
+            <td>
+                
+                @Html.ActionLink("Edit", "Edit", "DashBoard", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", "DashBoard", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", "DashBoard", new { id = item.Id })
+
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

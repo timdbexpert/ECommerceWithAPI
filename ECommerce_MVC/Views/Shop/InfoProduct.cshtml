@@ -1,0 +1,165 @@
+﻿@model ECommerce_MVC.Models.FiltersViewModel
+
+@{
+    ViewData["Title"] = "InfoProduct";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container pt-4">
+    <div class="row">
+        <div class="col-lg-9 col-md-9 col-sm-12">
+            <div class="product" style="float: left; padding-bottom:4em">
+
+                <div class="product-small-img">
+                    @foreach (var item in Model.Pictures)
+                    {
+                        <img src="~/images/@item.Name" onmouseover="myFunction(this)" alt="">
+
+                    }
+
+                </div>
+                <div class="img-container">
+                    <img class="img-fluid" id="imgBox" src="~/images/@Model.Product.MainImage" alt="">
+                </div>
+
+            </div>
+            <h5 style="font-family: Arial, Helvetica, sans-serif;"> @Model.Product.Description</h5>
+            <hr>
+            <div class="product-info">
+                <dl>
+                    <dt style="display: inline;"> Price</dt>
+                    <dd style="display: inline;">@Model.Product.Price $</dd>
+                
+                </dl>
+            </div>
+
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-12">
+            <div class="information">
+                <h5 style="color: rgb(196, 67, 67)" class="pb-2">@Model.Product.Price $</h5>
+                <span>This item does not ship to<strong> Azerbaijan.</strong> Please check other sellers who may ship internationally.</span>
+
+                @*<a asp-controller="Shop" asp-action="Checkout" asp-route-id="@Model.Product.Id"> <button style="outline: none;" class="addtoCart"><i class=" mdi mdi-cart-arrow-down"></i>Add to Cart</button></a>*@
+                <div class="information">
+                    <button style="outline: none;"><i class=" mdi mdi-play-box"></i>Buy Now</button>
+                    <button style="outline: none;" class="addtoCart" data-id="@Model.Product.Id"><i class=" mdi mdi-cart-arrow-down"></i>Add to Cart</button>
+                </div>
+
+            </div>
+        </div>
+        <table style="border: 1px solid #e9e9e9; border-collapse: collapse; width: 100%; padding-top:3em" >
+            <tbody style="box-sizing: border-box;">
+                <tr>
+                    <td>Brand</td>
+                    <td>@Model.Brands.Where(x => x.Id == Model.Product.BrandId).Select(x => x.Name).FirstOrDefault()</td>
+                </tr>
+                <tr>
+                    <td>Name</td>
+                    <td>@Model.Product.Name</td>
+                </tr>
+                @if (Model.Product.ProsessorId != 1)
+                {
+                    <tr>
+                        <td>Prosessor</td>
+                        <td>@Model.Prosessors.Where(x => x.Id == Model.Product.ProsessorId).Select(x => x.Name).FirstOrDefault()</td>
+                    </tr>
+                }
+                @if (Model.Product.HardDriveId != 1 && Model.Product.SSDId != 1)
+                {
+                    <tr>
+                        <td>SSD</td>
+                        <td>@Model.SSDs.Where(x => x.Id == Model.Product.SSDId).Select(x => x.Name).FirstOrDefault()</td>
+                    </tr>
+                    <tr>
+                        <td>Hard Drive</td>
+                        <td>@Model.HardDrives.Where(x => x.Id == Model.Product.HardDriveId).Select(x => x.Name).FirstOrDefault()</td>
+                    </tr>
+                }
+                @if (Model.Product.RAMId != 1)
+                {
+                    <tr>
+                        <td>RAM</td>
+                        <td>@Model.RAMs.Where(x => x.Id == Model.Product.RAMId).Select(x => x.Name).FirstOrDefault()</td>
+                    </tr>
+                }
+                @if (Model.Product.Operation_SystemId != 1)
+                {
+                    <tr>
+                        <td>Operation System</td>
+                        <td>@Model.Operation_Systems.Where(x => x.Id == Model.Product.Operation_SystemId).Select(x => x.Name).FirstOrDefault()</td>
+                    </tr>
+                }
+                @if (Model.Product.StorageId != 1)
+                {
+                    <tr>
+                        <td>Storage</td>
+                        <td>@Model.Storages.Where(x => x.Id == Model.Product.StorageId).Select(x => x.Name).FirstOrDefault()</td>
+                    </tr>
+                }
+                @if (Model.Product.Style_JoinId != 1)
+                {
+                    <tr>
+                        <td>Style Join</td>
+                        <td>@Model.Storages.Where(x => x.Id == Model.Product.Style_JoinId).Select(x => x.Name).FirstOrDefault()</td>
+                    </tr>
+                }
+                <tr>
+                    <td>Color</td>
+                    <td>@Model.Colors.Where(x => x.Id == Model.Product.ColorId).Select(x => x.Name).FirstOrDefault()</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@beta/dist/js.cookie.min.js"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/js-cookie@beta/dist/js.cookie.min.mjs"></script>
+
+
+<script>
+    function myFunction(smallimg) {
+        var fullImg = document.getElementById("imgBox");
+        fullImg.src = smallimg.src;
+    }
+
+    
+
+        $(".addtoCart").click(function () {
+            var products = [];
+            var productids;
+
+           // if (products.length == 0) {
+            productids = Cookies.get('ProductCart');
+            if (productids != undefined && productids != "" && productids != null) {
+                var ids = productids.split('-');
+
+                    if (ids.length == 1) {
+                        products.push(ids);
+                    };
+
+                    if (ids.length >1)
+                    {
+                        for (f of ids) {
+                            products.push(f);
+                        }
+                    }
+                    
+            }
+
+            var productID = $(this).attr('data-id');
+            if (productID != undefined) {
+                   products.push(productID);
+                   Cookies.set('ProductCart', products.join('-'), { expires: 30, path: '/' });
+            }
+         
+
+            // $.cookie('CartProducts', productID);
+
+            alert("Product added to Cart.");
+            console.log(products);
+            updateCartProduct();
+        });
+</script>
